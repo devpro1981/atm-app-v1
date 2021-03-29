@@ -86,6 +86,7 @@ spring:
     console:
       enabled: true
 
+#TODO add more logging
 logging:
   level:
     jdbc:
