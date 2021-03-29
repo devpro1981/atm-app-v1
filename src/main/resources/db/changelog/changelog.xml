@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd"
+        context="test, development">
+<!--        objectQuotingStrategy="QUOTE_ALL_OBJECTS">-->
+<!--    <include  file="com/example/news/news.changelog.xml"/>-->
+
+    <include  file="changelogdatatypes.groovy" relativeToChangelogFile="true" />
+<!--    <include  file="changelogccsmps1_x_full_export.groovy" relativeToChangelogFile="true" />-->
+    <include  file="ccs-mps-postgres-full-schema-edited-3.groovy" relativeToChangelogFile="true" />
+<!--    <include  file="ccs-mps-postgres-full-schema-edited-3_2.groovy" relativeToChangelogFile="true" />-->
+<!--    <include  file="changeset0001.groovy" relativeToChangelogFile="true" />-->
+<!--    <include  file="changelog0001.groovy" relativeToChangelogFile="true" />-->
+<!--    <include  file="changelog0002.groovy" relativeToChangelogFile="true" />-->
+<!--    <include  file="changelog0003.h2.sql" relativeToChangelogFile="true" />-->
+<!--    <include  file="devbootstrap.groovy" relativeToChangelogFile="true" context="development"/>-->
+<!--    <include  file="devbootstrap.xml" relativeToChangelogFile="true" context="development"/>-->
+<!--    <include  file="com/example/directory/directory.changelog.xml"/>-->
+</databaseChangeLog>

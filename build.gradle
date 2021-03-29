@@ -2,11 +2,50 @@ plugins {
 	id 'org.springframework.boot' version '2.4.4'
 	id 'io.spring.dependency-management' version '1.0.11.RELEASE'
 	id 'groovy'
+	id 'org.liquibase.gradle' version '2.0.2'
+	//Only to make annotation processing work in IntelliJ Idea
+	id "net.ltgt.apt" version "0.21"
+	id "net.ltgt.apt-idea" version "0.21"
 }
 
 group = 'com.example'
 version = '0.0.1-SNAPSHOT'
-sourceCompatibility = '11'
+//sourceCompatibility = '11'
+sourceCompatibility = JavaVersion.VERSION_11
+targetCompatibility = JavaVersion.VERSION_11
+ext {
+	groovyVersion = '3.0.7'
+	hibernateJpaMetamodelProcessorVersion = '6.0.0.Alpha6' //'5.4.12.Final'
+//	lombokVersion = '1.18.12'
+	//TODO update dependency to Tomcat 9
+//	tomcatVersion = '8.5.54'
+////	tomcatVersion = '7.0.76'
+//	tomcat8Version = '8.5.54'
+//	tomcatEmbeddedLoggingJuli = '8.5.2'
+////	tomcatEmbeddedLoggingJuli = '7.0.76'
+////	oracleJdbcDriverVersion = '18.3.0.0'
+//	oracleJdbcDriverVersion = '19.10.0.0'
+	hibernateValidatorVersion = '7.0.1.Final' //'5.4.3.Final'
+//	lxkArtifactoryRepository = 'https://artifactory.rds.lexmark.com/artifactory'
+//	cdpCoreVersion = '1.56.0'
+//	ccsDomainVersion = '1.71.1'
+	spockWithSpringVersion = '2.0-M3-groovy-3.0'
+	cglibNodepVersion = '3.3.0'
+	queryDslVersion = '4.3.1'
+	codenarcVersion = '1.6'
+	jacocoVersion = '0.8.5'
+//	spotbugsVersion = '4.1.2'
+	springDataJpaStarterVersion = '2.4.3'
+	guavaVersion = '30.1.1-jre'
+	commonsValidatorVersion = '1.7'
+
+	postgresqlDriverVersion = '42.2.14'
+
+	hibernateEnversVersion = '5.4.30.Final'
+	hibernateJcacheVersion = '5.4.30.Final'
+	ehcacheVersion = '3.9.2'
+	javaxCacheApiVersion = '1.1.1'
+}
 
 configurations {
 	compileOnly {
@@ -15,6 +54,7 @@ configurations {
 }
 
 repositories {
+	jcenter()
 	mavenCentral()
 }
 
@@ -22,15 +62,53 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-	implementation 'org.codehaus.groovy:groovy'
+//	implementation 'org.codehaus.groovy:groovy'
+
+	implementation group: 'org.codehaus.groovy', name: 'groovy', version: groovyVersion
+//	runtimeOnly group: 'org.codehaus.groovy', name: 'groovy', version: "$groovyVersion"
+	// https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-xml
+//	implementation group: 'org.codehaus.groovy', name: 'groovy-xml', version: "$groovyVersion"
+	implementation group: 'org.codehaus.groovy', name: 'groovy-all', version: groovyVersion, ext: 'pom'
+
 	compileOnly 'org.projectlombok:lombok'
 	developmentOnly 'org.springframework.boot:spring-boot-devtools'
 	runtimeOnly 'com.h2database:h2'
+
+	implementation group: 'org.postgresql', name: 'postgresql', version: postgresqlDriverVersion
+	implementation 'com.integralblue:log4jdbc-spring-boot-starter:2.0.0'
+
 	annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
 	annotationProcessor 'org.projectlombok:lombok'
+	annotationProcessor "org.hibernate:hibernate-jpamodelgen:$hibernateJpaMetamodelProcessorVersion"
 	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	implementation 'org.liquibase:liquibase-core'
+	runtimeOnly 'org.liquibase:liquibase-groovy-dsl:2.0.2'
+
+	liquibaseRuntime 'jakarta.xml.bind:jakarta.xml.bind-api:2.3.2'
+	liquibaseRuntime 'org.glassfish.jaxb:jaxb-runtime:2.3.2'
+	//To resolve logback
+	liquibaseRuntime 'org.springframework.boot:spring-boot-starter'
+	liquibaseRuntime "org.liquibase:liquibase-gradle-plugin:2.0.2"
+	liquibaseRuntime 'org.liquibase:liquibase-groovy-dsl:2.0.2'
+	liquibaseRuntime 'org.liquibase:liquibase-core:3.8.1'
+// Add POSTGRES path
+//	liquibaseRuntime (group: 'com.oracle.jdbc', name: 'ojdbc', version: "$oracleJdbcDriverVersion")
 }
 
+compileGroovy {
+	groovyOptions.javaAnnotationProcessing = true
+//	dependsOn codenarcMain
+}
+
+//sourceSets {
+//	generated {
+//		java {
+//			//Path to the generated JPA Canonical metamodels
+//			srcDirs = ['build/generated/sources/annotationProcessor/groovy/main']
+//		}
+//	}
+//}
 test {
 	useJUnitPlatform()
 }
