@@ -1,0 +1,232 @@
+#info:
+#  app:
+#    uid: ccs-product-service
+#    name: CCS Product Service
+#    description: Service managing products and deployables
+#    version: #version#
+#    platform: spring-boot-groovy
+#
+#logging:
+#  level:
+#    ROOT: ${LOGGING_LEVEL:INFO}
+#
+#server:
+#  address: ${SERVICE_ADDRESS:0.0.0.0}
+#  port: ${SERVICE_PORT:8003} # Use random open port, run with --port=8080 to override
+#
+#management:
+#  metrics:
+#    distribution:
+#      sla:
+#        http.server.requests: 50ms,100ms,200ms,300ms,400ms,600ms,1000ms,1500ms,2s,4s,6s
+#  endpoint:
+#    health:
+#      enabled: true
+#      show-details: "ALWAYS"
+#    prometheus:
+#      enabled: true
+#    loggers:
+#      enabled: true
+#  endpoints:
+#    enabled-by-default: false
+#    jmx:
+#      exposure:
+#        exclude: '*'
+#        include: ''
+#    web:
+#      exposure:
+#        exclude: ''
+#        include: health,prometheus
+#
+##LDAP
+#ldapSearch:
+#  userSearchBase: o=Lexmark
+#  userSearchFilter: (uid={0})
+#  groupSearchBase: ou=Groups,o=Lexmark
+#  groupSearchFilter: uniquemember={0}
+#  mdmAttribute: lexcustcompanyid
+#
+#microsoft:
+#  tenentId: ${MICROSOFT_TENANT_ID:foo}
+#  clientId: ${MICROSOFT_CLIENT_ID:bar}
+#  clientSecret: ${MICROSOFT_CLIENT_SECRET:baz}
+#
+##flexera
+#flexera:
+#  accountId: ${FLEXERA_ACCOUNT_ID:test}
+#  url: ${FLEXERA_URL:foobar}
+#  username: ${FLEXERA_USERNAME:test}
+#  password: ${FLEXERA_PASSWORD:test}
+#  partnerCode: ${FLEXERA_PARTNER_CODE:test}
+#  freeCCSAccountId: ${FLEXERA_FREE_CCS_ACCOUNT_ID:test}
+#
+##signing
+#hsm:
+#  password: ${SIGNING_PASSWORD:foobar}
+#  lexUrl: ${HSM_LEX:https://lex-drmlic.lex.lexmark.com:8443/drmssigner/drmssignature.xml}
+#  cebUrl: ${HSM_CEB:https://ceb-drmlic.lrdc.lexmark.com:8443/drmssigner/drmssignature.xml}
+#template:
+#  password: ${SIGNING_PASSWORD:foobar}
+#  lexUrl: ${TEMPLATE_LEX:https://lex-drmlic.lex.lexmark.com:8443/licensetemplatesigner/licensetemplatesignature}
+#  cebUrl: ${TEMPLATE_CEB:https://ceb-drmlic.lrdc.lexmark.com:8443/licensetemplatesigner/licensetemplatesignature}
+#
+#orion:
+#  newBomEndpointEnabled: ${NEW_ORION_BOM:false}
+#  servicesUrl: https://materialapi.orion.lexmark.com/
+#  bomUrl: Prod/bom/sn/
+#  firmwareUrl: Prod/file/
+#  username: ${ORION_USERNAME:foo}
+#  password: ${ORION_PASSWORD:bar}
+#enovia:
+#  bomUrl: ${ENOVIA_BOM_URL:https://plmqa18.lexmark.com/3dspace/LXKWebServices/EngineeringDataService/getPartDetails}
+#  username: ${ENOVIA_UN:webmeth}
+#  password: ${ENOVIA_PW:r6nWhg3d}
+#  attachmentUrl: ${ENOVIA_ATTACHMENT_URL:https://plmqa18.lexmark.com/3dspace/LXKWebServices/FileTransferDataService/getFileWithRevision}
+#
+#cors:
+#  origins: ${CORS_ORIGINS:https://us.cloud.onelxk.co,https://dev.us.cloud.onelxk.co,https://qa.us.cloud.onelxk.co,https://eu.cloud.onelxk.co,https://dev.eu.cloud.onelxk.co,https://qa.eu.cloud.onelxk.co}
+#
+#async:
+#  core-pool-size: ${ASYNC_CORE_POOL_SIZE:5}
+#
+#ccs:
+#  supportEmailAddress: ${SUPPORT_EMAIL:fake_email@lexmark.com}
+#  resourceDirectory: ${TEMP_DIR:/ccs/repository}
+#  enableMail: true
+#  tokenKey: ${PRODUCT_TOKEN_KEY:6dd0d66133c3fb0b344733b69bdf95a5}
+#  materialFile:
+#    directory: /ccsstorage/materials/
+#  partResourceFile:
+#    directory: /ccsstorage/partresources/
+#  url: ${CCS_URL:https://ccs-qa.lexmark.com}
+#  user: ${CCS_ACCOUNT_NAME:product-service}
+#  pw: ${CCS_ACCOUNT_PASSWORD:product-service}
+#  vscservice:
+#    deviceactivityurl: ${ccs.url}/vscDeviceActivity/
+#
+#  serviceAccounts:
+#    - username: testsupport
+#      password: $2a$10$nt4U8xbB6Xl8BmM7n8F9wO8a3WOPT2jH6.UE5dz/FsTL/S6g42SY.
+#      enabled: true
+#      roles:
+#        - ROLE_BOURBON
+#        - ROLE_SERVICE_ACCOUNT
+#
+#mse:
+#  base-gateway-uri: ${MSE_API_GATEWAY_BASE_URI:https://fake.mse.example.com}
+#  business-domain: ${MSE_DOMAIN:foobar}
+#  oauth-client-id: ${MSE_OAUTH_CLIENT_ID:ccs}
+#  idp-settings: ${MSE_IDP_SETTINGS:{"dev.us.cloud.onelxk.co":{"url":"https://idp.dev.us.cloud.onelxk.co", "urlCiam":"https://apis.dev.us.cloud.onelxk.co", "lxkOrgId":"bf899e52-b026-46f3-9715-fe54b5dd7637", "clientSecretIdp":"UTdZEgyc5Xp3pA5vDZB1lX4zgYRz_dkGSvKgnfSsHX0", "clientSecretCiam":"XfkTaPHW23_wAFk85S-HtaCRtZtUp_GrJIDOJNXpEsI"}}}
+#
+#jwt:
+#  issuer: ${JWT_ISSUER:identity-authorization-service}
+#  publicKeyUri: ${JWT_PUBLIC_KEY_URI:https://apis.dev.cloud.onelxk.co/oauth/discovery/keys}
+#  auth-Service-Prefix: ${JWT_AUTH_SERVICE_PREFIX:/ciam/identity-authorization-service}
+#  mgmt-Service-Prefix: ${JWT_MGMT_SERVICE_PREFIX:/ciam/identity-management-service}
+#
+#aws:
+#  smtp-server-host: ${SMTP_SERVER_HOST:mail.example.com}
+#  smtp-server-port: ${SMTP_SERVER_PORT:25}
+#  smtp-server-from-email: ${SMTP_FROM_EMAIL:fake_email@lexmark.com}
+#  smtp-server-username: ${SMTP_USERNAME:fakeUsername}
+#  smtp-server-password: ${SMTP_PASSWORD:fakePassword}
+#
+#spring:
+#  datasource:
+#    url: ${SERVICE_DB_URL}
+#    username: ${SERVICE_DB_USER:db_user}
+#    password: ${SERVICE_DB_PWD:db_pwd}
+#    test-on-borrow: true
+#    validation-query: SELECT 1
+#    driver-class-name: org.postgresql.Driver
+#    platform: postgres
+#    hikari:
+#      maximum-pool-size: 50
+#      minimum-idle: 5
+#
+#  jpa:
+#    properties:
+#      hibernate:
+#        temp:
+#          use_jdbc_metadata_defaults: false
+#    hibernate:
+#      ddl-auto: none
+#      use-new-id-generator-mappings: false # this makes db sequence work
+#    database-platform: org.hibernate.dialect.PostgreSQL95Dialect
+#  flyway:
+#    enabled: true
+#    locations: classpath:db/migrations/postgres
+#
+#  ldap:
+#    urls: ${LDAP_URL:ldaps://tdirservices.lexmark.com:636}
+#    username: ${LDAP_MGR_DN:uid=koshi,ou=System Accounts,o=Lexmark}
+#    password: ${LDAP_MGR_PWD:appacc}
+#---
+spring:
+  config:
+    activate:
+      on-profile: development
+  liquibase:
+    enabled: true
+    contexts: development
+    drop-first: false
+    change-log: classpath:db/changelog/changelog.xml
+  datasource:
+    url: jdbc:h2:mem:testdb;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  sql:
+    init:
+      platform: h2
+  h2:
+    console:
+      enabled: true
+      path: /admin/dbconsole
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true # formats SQL to multiline output
+        use_sql_comments: true # ORM inserted explanation of the intent of the SQL
+#        generate_statistics: true
+#  jpa:
+#    hibernate:
+#      ddl-auto: create-drop
+#    database-platform: org.hibernate.dialect.H2Dialect
+#ccs:
+#  cdn:
+#    useCdn: false
+#  restToken: foobar
+#  url: ${CCS_URL:https://ccs.lexmark.com/}
+#  materialFile:
+#    directory: out/tmp/
+#  resourceDirectory: out/tmp/
+#  partResourceFile:
+#    directory: out/tmp/
+#  enableMail: false
+#
+#testaccounts:
+#  serviceAccounts:
+#    - username: testsupport
+#      #password to use is test123
+#      password: $2a$10$d9BI/U7V45e2TDXahU2m/.781dWlltf4KT6vGpEfEbPvp.ZsquW6u
+#      enabled: true
+#      roles:
+#        - ROLE_BOURBON
+#        - ROLE_SERVICE_ACCOUNT
+#    - username: firmware
+#      #password to use is firmware
+#      password: $2a$10$e/YZjRDdEZq14RyD32ydxeTUBHIpWFd8TLK5l7.Lki81vE5q9EPPW
+#      enabled: true
+#      roles:
+#        - ROLE_BOURBON
+#    - username: catalogManager
+#      #password to use is Cm|23
+#      password: $2a$10$12sP8JMtEWJl/oMQOKtayOObpPVfJ7nLvm/kWLnVjJkeHQ1md2RYG
+#      enabled: true
+#      roles:
+#        - ROLE_CATALOG_MANAGER
+#        - ROLE_SERVICE_ACCOUNT
+#        - ROLE_CCS_CM_ADMINS
