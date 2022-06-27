@@ -19,3 +19,11 @@ create table account_balances (
                          opening_balance int, overdraft int, current_balance int,
                              CONSTRAINT FK_ACC_BAL_TO_ACC FOREIGN KEY (account_id) REFERENCES account(id)
 );
+
+--changeset salim:4
+create table cash_store (
+                                  id int primary key,
+                                  version int,
+                                  denomination int,
+                                  quantity int
+);
