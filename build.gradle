@@ -24,6 +24,9 @@ dependencies {
 	implementation 'com.integralblue:log4jdbc-spring-boot-starter:2.0.0'
 
 	implementation 'org.codehaus.groovy:groovy'
+
+	implementation group: 'org.codehaus.groovy', name: 'groovy-json'
+
 	implementation 'org.liquibase:liquibase-core'
 
 	testImplementation group: 'org.spockframework', name: 'spock-spring', version: "$spockWithSpringVersion"
